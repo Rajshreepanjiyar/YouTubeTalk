@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>YouTube RAG Chatbot</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="hero">
+
+        <h1>
+            <i class="fa-brands fa-youtube"></i>
+            YouTube RAG Chatbot
+        </h1>
+
+        <p>
+            Chat with any YouTube video using AI
+        </p>
+
+    </header>
+
+
+    <!-- ================= MAIN CONTAINER ================= -->
+
+    <div class="container">
+
+        <!-- ================= PROCESS VIDEO CARD ================= -->
+
+        <div class="card">
+
+            <h2>
+                <i class="fa-solid fa-link"></i>
+                Process YouTube Video
+            </h2>
+
+            <input
+                type="text"
+                id="youtube-url"
+                placeholder="Paste YouTube Video URL">
+
+            <button id="process-btn">
+
+                <i class="fa-solid fa-play"></i>
+
+                Process Video
+
+            </button>
+
+            <div id="processing-status" class="status"></div>
+
+        </div>
+
+
+
+        <!-- ================= CHAT CARD ================= -->
+
+        <div class="card">
+
+            <h2>
+
+                <i class="fa-solid fa-comments"></i>
+
+                Ask Questions
+
+            </h2>
+
+            <textarea
+                id="question"
+                rows="4"
+                placeholder="Ask anything about the video..."></textarea>
+
+            <button id="ask-btn">
+
+                <i class="fa-solid fa-paper-plane"></i>
+
+                Ask AI
+
+            </button>
+
+        </div>
+
+
+
+        <!-- ================= ANSWER CARD ================= -->
+
+        <div class="card">
+
+            <h2>
+
+                <i class="fa-solid fa-robot"></i>
+
+                AI Response
+
+            </h2>
+
+            <div id="answer-box">
+
+                Your answer will appear here...
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= LOADING OVERLAY ================= -->
+
+    <div id="loader" class="loader hidden">
+
+        <div class="spinner"></div>
+
+        <p>Processing Video...</p>
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+
+            Built using
+
+            FastAPI •
+
+            Whisper •
+
+            FAISS •
+
+            Groq •
+
+            Docker
+
+        </p>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script src="/static/script.js"></script>
+
+</body>
+
+</html>
