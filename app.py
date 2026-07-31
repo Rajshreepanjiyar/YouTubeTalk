@@ -23,10 +23,7 @@ from vector_db import (
     get_retriever
 )
 
-from url_validator import (
-    is_valid_youtube_url,
-    video_exists
-)
+from url_validator import is_valid_youtube_url
 
 
 from rag import ask_question
@@ -77,43 +74,43 @@ def process_video_api(request: VideoRequest):
     global retriever
 
     # -----------------------------------------
-    # Validate URL Format
+    # Validate YouTube URL Format
     # -----------------------------------------
 
     if not is_valid_youtube_url(request.youtube_url):
-
         raise HTTPException(
             status_code=400,
             detail="Please enter a valid YouTube URL."
         )
 
     # -----------------------------------------
-    # Check Whether Video Exists
-    # -----------------------------------------
-
-    if not video_exists(request.youtube_url):
-
-        raise HTTPException(
-            status_code=400,
-            detail="This YouTube video does not exist or is not accessible."
-        )
-
-    # -----------------------------------------
     # Process Video
     # -----------------------------------------
 
-    process_video(request.youtube_url)
+    try:
+        # Download audio + Whisper transcription
+        # + create FAISS vector database
+        process_video(request.youtube_url)
 
-    vector_store = load_vector_store()
+        # Load vector database
+        vector_store = load_vector_store()
 
-    retriever = get_retriever(vector_store)
+        # Create retriever
+        retriever = get_retriever(vector_store)
 
-    return {
+        return {
+            "message": "Video processed successfully."
+        }
 
-        "message": "Video processed successfully."
+    except Exception as e:
 
-    }
+        # Print actual error in Render logs
+        print(f"VIDEO PROCESSING ERROR: {repr(e)}")
 
+        raise HTTPException(
+            status_code=500,
+            detail="Failed to process the YouTube video."
+        )
 
 # ==========================================
 # Chat API
