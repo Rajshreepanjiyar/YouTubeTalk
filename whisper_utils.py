@@ -42,21 +42,25 @@ def download_audio(youtube_url):
     ydl_opts = {
         "format": "bestaudio/best",
         "outtmpl": "data/audio/audio.%(ext)s",
-        "quiet": True,
+        "quiet": False,
         "noplaylist": True,
     }
 
-    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        ydl.download([youtube_url])
+    try:
+        print(f"Attempting to download: {youtube_url}")
+
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            ydl.download([youtube_url])
+
+    except Exception as e:
+        print(f"YT-DLP ERROR: {repr(e)}")
+        raise
 
     for file in os.listdir("data/audio"):
-
         if file.startswith("audio"):
             return os.path.join("data/audio", file)
 
     raise Exception("Audio download failed.")
-
-
 # ==========================================
 # Speech to Text using Whisper
 # ==========================================

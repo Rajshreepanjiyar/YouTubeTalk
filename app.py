@@ -23,10 +23,10 @@ from vector_db import (
     get_retriever
 )
 
-from url_validator import (
-    is_valid_youtube_url,
-    video_exists
-)
+# from url_validator import (
+#     is_valid_youtube_url,
+#     video_exists
+# )
 
 
 from rag import ask_question
@@ -91,12 +91,12 @@ def process_video_api(request: VideoRequest):
     # Check Whether Video Exists
     # -----------------------------------------
 
-    if not video_exists(request.youtube_url):
+    # if not video_exists(request.youtube_url):
 
-        raise HTTPException(
-            status_code=400,
-            detail="This YouTube video does not exist or is not accessible."
-        )
+    #     raise HTTPException(
+    #         status_code=400,
+    #         detail="This YouTube video does not exist or is not accessible."
+    #     )
 
     # -----------------------------------------
     # Process Video
